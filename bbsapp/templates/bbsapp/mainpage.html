@@ -27,11 +27,56 @@
                 </li>
             </ul>
         </div>
-        <div class="rbox"></div>
     </div>
-    <div>
+    <div class="bgbox">
+        <div class="searchbox">
+            <input type="text" name="search" placeholder="搜索">
+        </div>
+        <div class="searchbuttonbox">
+            <a href="">搜索</a>
+        </div>
+        <div>
+            <img src="" alt="">
+        </div>
+    </div>
+    <div class="postingbox">
+        {% for p in c_page %}
+        <div class="replybox">
+            {{ p.comment_num }}
+        </div>
+        <div class="titlebox">
+            <a href="#">{{ p.title }}</a>
+        </div>
+        <div class="posterbox">
+            {{ p.poster }}
+        </div>
+        <div class="contentbox">
+            {{ p.content }}
+        </div>
 
+        {% endfor %}
+
+        {% if c_page.has_previous %}
+        <a href="/bbsapp/mainpage?page={{ c_page.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        {% for p_num in paginator.page_range %}
+        {% if p_num == c_page.number %}
+        {{ p_num }}
+        {% else %}
+        <a href="/bbsapp/mainpage?page={{ p_num }}">{{ p_num }}</a>
+        {% endif %}
+        {% endfor %}
+
+
+        {% if c_page.has_next %}
+        <a href="/bbsapp/mainpage?page={{ c_page.next_page_number }}">下一页</a>
+        {% endif %}
+        <div class="bottombox">
+
+        </div>
     </div>
+
 </body>
 
 </html>
