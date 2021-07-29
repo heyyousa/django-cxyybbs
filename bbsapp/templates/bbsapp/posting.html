@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'bbsapp/css/mainpage.css' %}">
-    <title>主页</title>
+    <link rel="stylesheet" href="{% static 'bbsapp/css/posting.css' %}">
+    <title>评论</title>
 </head>
 
 <body>
@@ -31,35 +31,36 @@
         </header>
 
         <div class="contentbox">
-            <div class="searchbox">
-                <input type="text" name="search" placeholder="搜索">
-            </div>
-            <div class="searchbuttonbox">
-                <a href="">搜索</a>
-            </div>
-            <div>
-                <img src="" alt="">
-            </div>
         </div>
 
         <div class="mainbox">
             <ul class="pbox">
+                <li>
+                    <div class="replybox">
+                        楼主
+                    </div>
+                    <div class="posterbox">
+                        {{ posting.0.poster }}
+                    </div>
+                    <div class="contentbox">
+                        {{ posting.0.content }}
+                    </div>
+                    <div class="timebox">
+                        {{ posting.0.created_time|date:'y-m-d H:m:s' }}
+                    </div>
+                </li>
                 {% for p in c_page %}
                 <li>
                     <div class="replybox">
-                        {{ p.comment_num }}
-                    </div>
-                    <div class="titlebox">
-                        <a href="/bbsapp/posting?ptindex={{ p.index }}">{{ p.title }}</a>
                     </div>
                     <div class="posterbox">
                         {{ p.poster }}
                     </div>
-                    <div class="digestbox">
+                    <div class="contentbox">
                         {{ p.content }}
                     </div>
                     <div class="timebox">
-                        {{ p.created_time|date:'y-m-d h:m:s' }}
+                        {{ p.created_time|date:'y-m-d H:m:s' }}
                     </div>
                 </li>
                 {% endfor %}
@@ -86,11 +87,14 @@
             </div>
         </div>
         <div class="leftbox">
+            <div class="backmainbox">
+                <a href="/bbsapp/backmain">主页</a>
+            </div>
             <div class="createbox">
-                <a href="/bbsapp/wposting">发帖</a>
+                <a href="">发帖</a>
             </div>
             <div class="backtopbox">
-                <a href="/bbsapp/wposting">回到顶部</a>
+                <a href="/bbsapp/backtop?chtml={{ comment }}">回到顶部</a>
             </div>
         </div>
         <div class="rightbox">

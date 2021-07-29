@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bbsapp/css/test.css' %}">
+    <title>test</title>
+</head>
+
+<body>
+
+    <header class="headerbox">头部header</header>
+    <div class="content">contentdiv</div>
+    <div class="mainbox">主要内容div</div>
+    <div class="leftbox">左侧栏div</div>
+    <div class="rightbox">右侧栏</div>
+    <footer class="footerbox">底部footer</footer>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=1920">
+    <link rel="stylesheet" href="{% static 'bbsapp/css/mainpage.css' %}">
+    <title>主页</title>
+</head>
+
+<body>
+    <header class="headerbox">
+        <div class="logbox">
+            <a href="#">沧县医院</a>
+        </div>
+        <div class="menubox">
+            <ul>
+                <li>
+                    <a href="#">主页</a>
+                </li>
+                <li>
+                    <a href="#">登录</a>
+                </li>
+                <li>
+                    <a href="#">注册</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="contentbox">
+        <div class="searchbox">
+            <input type="text" name="search" placeholder="搜索">
+        </div>
+        <div class="searchbuttonbox">
+            <a href="">搜索</a>
+        </div>
+        <div>
+            <img src="" alt="">
+        </div>
+    </div>
+
+    <div class="mainbox">
+        {% for p in c_page %}
+        <div class="pbox">
+            <div class="replybox">
+                {{ p.comment_num }}
+            </div>
+            <div class="titlebox">
+                <a href="#">{{ p.title }}</a>
+            </div>
+            <div class="posterbox">
+                {{ p.poster }}
+            </div>
+            <div class="timebox">
+                {{ p.created_time|date:'y-m-d h:m:s' }}
+            </div>
+            <div class="contentbox">
+                {{ p.content }}
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if c_page.has_previous %}
+        <a href="/bbsapp/mainpage?page={{ c_page.previous_page_number }}">上一页</a>
+        {% endif %}
+
+
+        {% for p_num in paginator.page_range %}
+        {% if p_num == c_page.number %}
+        {{ p_num }}
+        {% else %}
+        <a href="/bbsapp/mainpage?page={{ p_num }}">{{ p_num }}</a>
+        {% endif %}
+        {% endfor %}
+
+
+        {% if c_page.has_next %}
+        <a href="/bbsapp/mainpage?page={{ c_page.next_page_number }}">下一页</a>
+        {% endif %}
+    </div>
+    <div class="lefbox">
+    </div>
+    <div class="rightbox">
+    </div>
+    <footer>
+
+    </footer>
+</body>
+
+</html>

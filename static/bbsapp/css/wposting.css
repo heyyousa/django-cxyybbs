@@ -43,6 +43,7 @@ html{
 }
 
 .contentbox {
+    width: 50px;
     text-align: center;
 }
 
@@ -78,56 +79,44 @@ html{
     float: left;
     width: 100%;
     height: auto;
-}
-
-
-.mainbox ul li {
-    list-style: none;
-    width: 800px;
-    height: 30%;
     position: relative;
-    left: 25%;
-    border:1px solid black;
+    top: 50px;
+}
+
+.titleinput {
+    position: relative;
+    left: 30%;
+}
+
+.titleinput input {
+    font-size: 1.5rem;
+    width: 40%;
+    border: 1px solid black;
     border-radius: 5px;
-    margin-top: 5px;
 }
 
-.replybox {
-    display: inline-block;
-    width: 50px;
-    height: 20px;
-    margin-left: 10px;
-    margin-top: 10px;
-    border:1px solid black;
-    border-radius: 5px;
-    text-align: center;
+.contentinput {
+    position: relative;
+    left: 30%;
 }
 
-.titlebox {
-    display: inline-block;
-    width: 50%;
-    height: 5%;
-    margin-left: 10px;
-}
-
-.posterbox {
-    display: inline-block;
-    width: 30%;
-    height: 5%;
-    text-align: right;
-}
-
-.digestbox {
-    display: inline-block;
-    width: 70%;
-    height: 5%;
-    margin-left: 75px;
+.contentinput textarea {
     margin-top: 20px;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    width: 40%;
+    border:1px solid black;
+    border-radius: 5px;
 }
 
-.timebox {
+.buttonbox {
     display: inline-block;
+    position: relative;
+    left: 30%;
+}
+
+.buttonbox input {
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 .leftbox {
@@ -186,10 +175,6 @@ html{
     height: 100px;
     width: 100%;
     clear: both;
-}
-
-.pagebox {
-    text-align: center;
 }
 
 

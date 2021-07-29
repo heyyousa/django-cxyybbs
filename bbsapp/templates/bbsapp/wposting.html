@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bbsapp/css/wposting.css' %}">
+    <title>主页</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="headerbox">
+            <div class="logbox">
+                <a href="#">沧县医院</a>
+            </div>
+            <div class="menubox">
+                <ul>
+                    <li>
+                        <a href="#">主页</a>
+                    </li>
+                    <li>
+                        <a href="#">登录</a>
+                    </li>
+                    <li>
+                        <a href="#">注册</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="contentbox">
+
+        </div>
+
+        <div class="mainbox">
+            <form action="/bbsapp/create_pst/" method="POST">
+                <div class="titleinput">
+                    <input type="text" name="ptitle" placeholder="标题">
+                </div>
+                <div class="contentinput">
+                    <textarea name="pcontent" cols="30" rows="10" placeholder="请输入内容"></textarea>
+                </div>
+                <div class="buttonbox">
+                    <input type="submit" value="发表">
+                </div>
+                <div class="buttonbox">
+                    <input type="reset" value="重置">
+                </div>
+            </form>
+        </div>
+        <div class="leftbox">
+            <div class="createbox">
+                <a href="">发帖</a>
+            </div>
+            <div class="backtopbox">
+                <a href="">回到顶部</a>
+            </div>
+        </div>
+        <div class="rightbox">
+            right
+        </div>
+        <footer class="footerbox">
+
+        </footer>
+    </div>
+</body>
+
+</html>
