@@ -55,7 +55,7 @@ html{
 .searchbox input {
     font-size: 1.5rem;
     width: 98%;
-    height: 10%;
+    height: 8%;
     margin-top: 5%;
     border-radius: 5px;
     border:1px solid black;
@@ -80,6 +80,9 @@ html{
     height: auto;
 }
 
+.mainbox ul {
+    margin-top: -8px;
+}
 
 .mainbox ul li {
     list-style: none;
@@ -132,7 +135,6 @@ html{
 
 .leftbox {
     float: left;
-    background-color: rgb(162, 162, 207);
     width: 200px;
     height: 300px;
     margin-left: -90%;

@@ -52,6 +52,11 @@
                 {% for p in c_page %}
                 <li>
                     <div class="replybox">
+                        {% if p.poster == posting.poster %}
+                        楼主
+                        {% else %}
+                        xx
+                        {% endif %}
                     </div>
                     <div class="posterbox">
                         {{ p.poster }}
@@ -68,7 +73,7 @@
 
             <div class="pagebox">
                 {% if c_page.has_previous %}
-                <a href="/bbsapp/mainpage?page={{ c_page.previous_page_number }}">上一页</a>
+                <a href="/bbsapp/postingpage?page={{ c_page.previous_page_number }}">上一页</a>
                 {% endif %}
 
 
@@ -76,13 +81,13 @@
                 {% if p_num == c_page.number %}
                 {{ p_num }}
                 {% else %}
-                <a href="/bbsapp/mainpage?page={{ p_num }}">{{ p_num }}</a>
+                <a href="/bbsapp/postingpage?page={{ p_num }}">{{ p_num }}</a>
                 {% endif %}
                 {% endfor %}
 
 
                 {% if c_page.has_next %}
-                <a href="/bbsapp/mainpage?page={{ c_page.next_page_number }}">下一页</a>
+                <a href="/bbsapp/postingpage?page={{ c_page.next_page_number }}">下一页</a>
                 {% endif %}
             </div>
         </div>
@@ -91,15 +96,28 @@
                 <a href="/bbsapp/backmain">主页</a>
             </div>
             <div class="createbox">
-                <a href="">发帖</a>
+                <a href="/bbsapp/wposting">发帖</a>
             </div>
             <div class="backtopbox">
-                <a href="/bbsapp/backtop?chtml={{ comment }}">回到顶部</a>
+                <a href="/bbsapp/backtop?chtml={{ posting.index }}">回到开始</a>
+            </div>
+            <div class="formbox">
+                <form action="/bbsapp/create_cmt/" method="POST">
+                    <div>
+                        <textarea name="ccontent" id="" cols="20" rows="10" placeholder="请输入回复内容"></textarea>
+                    </div>
+                    <div class="buttonbox">
+                        <input type="submit" value="评论">
+                    </div>
+                    <div>
+                        <input type="hidden" name="pstindex" value="{{ posting.0.index }}">
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="rightbox">
-            right
-        </div>
+    </div>
+    <div class="rightbox">
+
         <footer class="footerbox">
 
         </footer>

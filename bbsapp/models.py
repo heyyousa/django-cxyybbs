@@ -30,12 +30,12 @@ class Posting(models.Model):
     content=models.TextField('内容')
     content_digest=models.CharField('内容摘要',max_length=40,default='')
     poster=models.CharField('发帖人',max_length=10,default='游客')
-    comment_num=models.IntegerField('评论数',null=True)
-    like_num=models.IntegerField('点赞数',null=True)
+    comment_num=models.IntegerField('评论数',default=0)
+    like_num=models.IntegerField('点赞数',default=0)
     created_time=models.DateTimeField('创建时间',auto_now_add=True)
     updated_time=models.DateTimeField('更新时间',auto_now=True)
     is_active=models.BooleanField('活跃状态',default=True)
-    operator=models.CharField('操作人',max_length=10,null=True)
+    operator=models.CharField('操作人',max_length=10,default='')
 
     class Meta:
         db_table='posting'
@@ -48,17 +48,18 @@ class Comments(models.Model):
     index=models.CharField('索引',primary_key=True,max_length=10)
     posting=models.ForeignKey(Posting,null=True,blank=True,on_delete=models.SET_NULL)
     content=models.TextField('评论')
-    poster=models.CharField('评论人',max_length=10,null=True)
+    poster=models.CharField('评论人',max_length=10,default='游客')
     created_time=models.DateTimeField('创建时间',auto_now_add=True)
     updated_time=models.DateTimeField('更新时间',auto_now=True)
     is_active=models.BooleanField('活跃状态',default=True)
     operator=models.CharField('操作人',max_length=10)
 
-
     class Meta:
         db_table='comments'
         verbose_name_plural='评论表'
 
+    def __str__(self):
+        return '%s|%s|%s|%s|%s|%s'%(self.content,self.poster,self.created_time,self.updated_time,self.is_active,self.operator)
 
 
 

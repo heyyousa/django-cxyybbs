@@ -35,18 +35,18 @@
         </div>
 
         <div class="mainbox">
-            <form action="/bbsapp/create_pst/" method="POST">
-                <div class="titleinput">
-                    <input type="text" name="ptitle" placeholder="标题">
-                </div>
+            <form action="/bbsapp/create_cmt/" method="POST">
                 <div class="contentinput">
-                    <textarea name="pcontent" cols="30" rows="10" placeholder="请输入内容"></textarea>
+                    <textarea name="ccontent" cols="30" rows="10" placeholder="请输入内容"></textarea>
                 </div>
                 <div class="buttonbox">
                     <input type="submit" value="发表">
                 </div>
                 <div class="buttonbox">
                     <input type="reset" id="reset" value="重置">
+                </div>
+                <div>
+                    <input type="hidden" name="pstindex" id="pstindexbox" value="{{ pstindex }}">
                 </div>
             </form>
         </div>

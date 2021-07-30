@@ -23,8 +23,8 @@ def postingpage(request):
     posting=Posting.objects.filter(Q(index=postingid),Q(is_active=True))
 
     comments = Comments.objects.filter(Q(posting_id=postingid), Q(is_active=True))
-    page_num=request.GET.get('page',1)
 
+    page_num=request.GET.get('page',1)
     paginator=Paginator(comments,30)
     c_page=paginator.page(int(page_num))
 
@@ -56,6 +56,47 @@ def create_pst(request):
 
     return render(request,'bbsapp/posting.html',locals())
 
+
+#评论页面
+def wcomment(request):
+    return render(request,'bbsapp/wcomment.html')
+
+
+#添加评论功能
+def create_cmt(request):
+    pstindex=request.POST.get('pstindex')
+    ccontent=request.POST.get('ccontent')
+    poster=request.GET.get('poster')
+    page=request.GET.get('page')
+    print(pstindex)
+
+    if ccontent=='':
+        return HttpResponse('请输入内容')
+
+    if not poster:
+        poster='游客'
+
+    a = Comments.objects.last()
+    if not bool(a):
+        lindex = "0000000001"
+        cmtindex = lindex
+    else:
+        lindex = int(a.index)
+        lindex += 1
+        cmtindex = str(lindex).zfill(10)
+
+    Comments.objects.create(index=cmtindex,content=ccontent,poster=poster,posting_id=pstindex)
+
+    comments=Comments.objects.filter(Q(posting_id=pstindex),Q(is_active=True)).order_by('created_time')
+    posting = Posting.objects.filter(Q(index=pstindex), Q(is_active=True))
+
+    page_num = request.GET.get('page', 1)
+    paginator = Paginator(comments, 30)
+    c_page = paginator.page(int(page_num))
+
+    return render(request,'bbsapp/posting.html',locals())
+
+
 #回到主页功能
 def backmain(request):
     return HttpResponseRedirect('/bbsapp/mainpage')
@@ -63,10 +104,11 @@ def backmain(request):
 #回到顶部功能
 def backtop(request):
     chtml=request.GET.get('chtml')
+    print(chtml)
     if chtml=='main':
         return HttpResponseRedirect('/bbsapp/mainpage')
-    elif chtml=='comment':
-        return HttpResponseRedirect('/bbsapp/posting.html')
+    else:
+        return HttpResponseRedirect('/bbsapp/postingpage')
 
 #写帖子测试数据函数
 def wdata(request):
