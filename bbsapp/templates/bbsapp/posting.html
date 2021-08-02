@@ -73,7 +73,7 @@
 
             <div class="pagebox">
                 {% if c_page.has_previous %}
-                <a href="/bbsapp/postingpage?page={{ c_page.previous_page_number }}">上一页</a>
+                <a href="/bbsapp/posting?page={{ c_page.previous_page_number }}&ptindex={{ posting.0.index }}">上一页</a>
                 {% endif %}
 
 
@@ -81,13 +81,13 @@
                 {% if p_num == c_page.number %}
                 {{ p_num }}
                 {% else %}
-                <a href="/bbsapp/postingpage?page={{ p_num }}">{{ p_num }}</a>
+                <a href="/bbsapp/posting?page={{ p_num }}&ptindex={{ posting.0.index }}">{{ p_num }}</a>
                 {% endif %}
                 {% endfor %}
 
 
                 {% if c_page.has_next %}
-                <a href="/bbsapp/postingpage?page={{ c_page.next_page_number }}">下一页</a>
+                <a href="/bbsapp/posting?page={{ c_page.next_page_number }}&ptindex={{ posting.0.index }}">下一页</a>
                 {% endif %}
             </div>
         </div>
