@@ -34,6 +34,7 @@ def postingpage(request):
 def wposting(request):
     return render(request,'bbsapp/wposting.html',locals())
 
+
 #发帖功能
 def create_pst(request):
     ptitle=request.POST.get('ptitle')
@@ -42,6 +43,8 @@ def create_pst(request):
 
     if ptitle=='' or pcontent=='':
         return HttpResponse('请输入标题和内容')
+    if not poster:
+        poster='游客'
 
     a = Posting.objects.last()
     if not bool(a):
@@ -52,7 +55,8 @@ def create_pst(request):
         lindex += 1
         pstindex = str(lindex).zfill(10)
 
-    posting=Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster)
+    Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster)
+    posting=Posting.objects.filter(index=pstindex,is_active=True)
 
     return render(request,'bbsapp/posting.html',locals())
 
