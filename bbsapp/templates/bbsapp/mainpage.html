@@ -66,8 +66,14 @@
             </ul>
 
             <div class="pagebox">
+                {% if paginator.num_pages != 1 %}
+                {% if c_page.number != 1 %}
+                <a href="/bbsapp/mainpage?page={{ 1 }}">首页</a>
+                {% endif %}
+
+
                 {% if c_page.has_previous %}
-                <a href="/bbsapp/mainpage?page={{ c_page.previous_page_number }}&ptindex={{ posting.0.index }}">上一页</a>
+                <a href="/bbsapp/mainpage?page={{ c_page.previous_page_number }}">上一页</a>
                 {% endif %}
 
 
@@ -75,13 +81,19 @@
                 {% if p_num == c_page.number %}
                 {{ p_num }}
                 {% else %}
-                <a href="/bbsapp/mainpage?page={{ p_num }}&ptindex={{ posting.0.index }}">{{ p_num }}</a>
+                <a href="/bbsapp/mainpage?page={{ p_num }}">{{ p_num }}</a>
                 {% endif %}
                 {% endfor %}
 
 
                 {% if c_page.has_next %}
-                <a href="/bbsapp/mainpage?page={{ c_page.next_page_number }}&ptindex={{ posting.0.index }}">下一页</a>
+                <a href="/bbsapp/mainpage?page={{ c_page.next_page_number }}">下一页</a>
+                {% endif %}
+
+
+                {% if c_page.number != paginator.num_pages %}
+                <a href="/bbsapp/mainpage?page={{ paginator.num_pages }}">尾页</a>
+                {% endif %}
                 {% endif %}
             </div>
         </div>

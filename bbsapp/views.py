@@ -10,9 +10,9 @@ from django.db.models import Q
 # bbs主页
 def mainpage(request):
     postings = Posting.objects.all()
-    page_num = request.GET.get('page', 1)  # 第二个参数为第一参数没有时的默认值
 
     paginator = Paginator(postings, 30)
+    page_num = request.GET.get('page', 1)  # 第二个参数为第一参数没有时的默认值
     c_page = paginator.page(int(page_num))
 
     return render(request, 'bbsapp/mainpage.html', locals())
@@ -25,9 +25,9 @@ def posting(request):
     posting = Posting.objects.filter(Q(index=postingid), Q(is_active=True))
     comments = Comments.objects.filter(Q(posting_id=postingid), Q(is_active=True))
 
-    page_num = request.GET.get('page', 1)
-    paginator = Paginator(comments, 30)
-    c_page = paginator.page(int(page_num))
+    paginator = Paginator(comments, 30) # 分页对象
+    page_num = request.GET.get('page', 1) # 获取当前页数字
+    c_page = paginator.page(int(page_num)) # 当前页
 
     return render(request, 'bbsapp/posting.html', locals())
 
@@ -38,14 +38,18 @@ def wposting(request):
 
 # 发帖功能
 def create_pst(request):
+    # 从request中获取有用信息
     ptitle = request.POST.get('ptitle')
     pcontent = request.POST.get('pcontent')
     poster = request.GET.get('poster')
 
+    # 获取用户IP
+    userip=request.META['REMOTE_ADDR']
+
     if ptitle == '' or pcontent == '':
         return HttpResponse('请输入标题和内容')
     if not poster:
-        poster='游客'
+        poster='游客'+userip
 
     a = Posting.objects.last()
     if not bool(a):
@@ -56,31 +60,30 @@ def create_pst(request):
         lindex += 1
         pstindex = str(lindex).zfill(10)
 
-
-    Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster)
+    Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster,comment_num=0)
     posting=Posting.objects.filter(index=pstindex,is_active=True)
 
     return render(request, 'bbsapp/posting.html', locals())
 
 
-# 评论页面
-def wcomment(request):
-    return render(request, 'bbsapp/wcomment.html')
-
-
 # 添加评论功能
 def create_cmt(request):
-    pstindex = request.POST.get('pstindex')
+    ptindex = request.POST.get('ptindex')
     ccontent = request.POST.get('ccontent')
     poster = request.GET.get('poster')
     page = request.GET.get('page')
-    print(pstindex)
+
+    # 获取用户IP
+    userip=request.META['REMOTE_ADDR']
+    ipmask=userip[0:7]+'***'+userip[:-1]
+
+    posting = Posting.objects.filter(Q(index=ptindex), Q(is_active=True))
 
     if ccontent == '':
         return HttpResponse('请输入内容')
 
     if not poster:
-        poster = '游客'
+        poster = '游客'+userip
 
     a = Comments.objects.last()
     if not bool(a):
@@ -91,11 +94,14 @@ def create_cmt(request):
         lindex += 1
         cmtindex = str(lindex).zfill(10)
 
-    Comments.objects.create(index=cmtindex, content=ccontent, poster=poster, posting_id=pstindex)
+    comment_num=posting[0].comment_num
+    comment_num+=1
 
-    comments = Comments.objects.filter(Q(posting_id=pstindex), Q(is_active=True)).order_by('created_time')
-    posting = Posting.objects.filter(Q(index=pstindex), Q(is_active=True))
+    Comments.objects.create(index=cmtindex, content=ccontent, poster=poster, posting_id=ptindex)
 
+    posting.update(comment_num=comment_num)
+
+    comments = Comments.objects.filter(Q(posting_id=ptindex), Q(is_active=True)).order_by('created_time')
     page_num = request.GET.get('page', 1)
     paginator = Paginator(comments, 30)
     c_page = paginator.page(int(page_num))
@@ -111,11 +117,11 @@ def backmain(request):
 # 回到顶部功能
 def backtop(request):
     chtml = request.GET.get('chtml')
-    print(chtml)
+
     if chtml == 'main':
         return HttpResponseRedirect('/bbsapp/mainpage')
     else:
-        return HttpResponseRedirect('/bbsapp/postingpage')
+        return HttpResponseRedirect('/bbsapp/posting')
 
 
 # 写帖子测试数据函数

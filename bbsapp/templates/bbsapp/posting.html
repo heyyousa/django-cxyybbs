@@ -55,7 +55,7 @@
                         {% if p.poster == posting.poster %}
                         楼主
                         {% else %}
-                        xx
+                        {{ posting.0.comment_num }}
                         {% endif %}
                     </div>
                     <div class="posterbox">
@@ -72,6 +72,11 @@
             </ul>
 
             <div class="pagebox">
+                {% if paginator.num_pages != 1 %}
+                {% if c_page.number != 1 %}
+                <a href="/bbsapp/posting?page={{ 1 }}&ptindex={{ posting.0.index }}">首页</a>
+                {% endif %}
+
                 {% if c_page.has_previous %}
                 <a href="/bbsapp/posting?page={{ c_page.previous_page_number }}&ptindex={{ posting.0.index }}">上一页</a>
                 {% endif %}
@@ -89,6 +94,11 @@
                 {% if c_page.has_next %}
                 <a href="/bbsapp/posting?page={{ c_page.next_page_number }}&ptindex={{ posting.0.index }}">下一页</a>
                 {% endif %}
+
+                {% if c_page.number != paginator.num_pages %}
+                <a href="/bbsapp/posting?page={{ paginator.num_pages }}&ptindex={{ posting.0.index }}">尾页</a>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
         <div class="leftbox">
@@ -99,7 +109,7 @@
                 <a href="/bbsapp/wposting">发帖</a>
             </div>
             <div class="backtopbox">
-                <a href="/bbsapp/backtop?chtml={{ posting.index }}">回到开始</a>
+                <a href="/bbsapp/posting?ptindex={{ posting.0.index }}">回到开始</a>
             </div>
             <div class="formbox">
                 <form action="/bbsapp/create_cmt/" method="POST">
@@ -110,7 +120,7 @@
                         <input type="submit" value="评论">
                     </div>
                     <div>
-                        <input type="hidden" name="pstindex" value="{{ posting.0.index }}">
+                        <input type="hidden" name="ptindex" value="{{ posting.0.index }}">
                     </div>
                 </form>
             </div>

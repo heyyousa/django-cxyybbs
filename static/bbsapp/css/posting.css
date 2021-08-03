@@ -138,7 +138,7 @@ html{
     position: relative;
     left: 55%;
     text-align: center;
-    background-color: rgb(68, 154, 224);
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .createbox {
@@ -150,7 +150,7 @@ html{
     left: 55%;
     top: 10px;
     text-align: center;
-    background-color: rgb(68, 154, 224);
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .backtopbox {
@@ -162,7 +162,7 @@ html{
     left: 55%;
     top: 20px;
     text-align: center;
-    background-color: rgb(68, 154, 224);
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .createcmtbox {
@@ -174,7 +174,7 @@ html{
     left: 55%;
     top: 30px;
     text-align: center;
-    background-color: rgb(68, 154, 224);
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .formbox {
@@ -192,6 +192,13 @@ html{
 
 .formbox input {
     font-size: 1rem;
+}
+
+.formbox textarea {
+    min-width: 206px;
+    min-height: 106px;
+    max-width: 206px;
+    max-height: 106px;
 }
 
 .buttonbox {

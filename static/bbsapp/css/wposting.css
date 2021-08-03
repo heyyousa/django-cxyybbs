@@ -72,7 +72,7 @@ html{
     position: relative;
     top: 1px;
     border-radius: 5px;
-    background-color: rgba(131, 213, 245, 0.6);;
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .mainbox {
@@ -142,7 +142,7 @@ html{
     position: relative;
     left: 55%;
     text-align: center;
-    background-color: rgb(68, 154, 224);
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .createbox {
@@ -153,7 +153,7 @@ html{
     position: relative;
     left: 55%;
     text-align: center;
-    background-color: rgb(68, 154, 224);
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .backtopbox {
@@ -165,7 +165,7 @@ html{
     left: 55%;
     top: 10px;
     text-align: center;
-    background-color: rgb(68, 154, 224);
+    background-color: rgba(131, 213, 245, 0.6);
 }
 
 .hiddenbox {

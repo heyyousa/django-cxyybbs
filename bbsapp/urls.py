@@ -7,7 +7,6 @@ urlpatterns = [
     path('posting/',views.posting),  # 帖子页面
     path('wposting/',views.wposting),  # 发帖页面
     path('create_pst/',views.create_pst),  # 发帖功能
-    path('wcomment/',views.wcomment),  # 评论页面
     path('create_cmt/',views.create_cmt),  # 评论功能
     path('backmain/',views.backmain),  # 返回主页
     path('backtop/',views.backtop),  # 返回顶部
