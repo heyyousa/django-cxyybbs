@@ -6,6 +6,28 @@ from django.db.models import Q
 
 
 # Create your views here.
+#ip遮掩网段函数
+def maskip(userip):
+    a = []
+
+    for i in range(len(userip)):
+        a.append(userip[i])
+
+    b = ''
+    num = 0
+    for j in range(len(userip)):
+        if a[j] == '.':
+            num += 1
+        if num != 2:
+            b += a[j]
+        elif num == 2:
+            if a[j] == '.':
+                b += a[j]
+                for n in range(3):
+                    b += '*'
+
+    return b
+
 
 # bbs主页
 def mainpage(request):
@@ -43,13 +65,14 @@ def create_pst(request):
     pcontent = request.POST.get('pcontent')
     poster = request.GET.get('poster')
 
-    # 获取用户IP
+    # 获取用户IP，并伪装
     userip=request.META['REMOTE_ADDR']
+    mkip=maskip(userip)
 
     if ptitle == '' or pcontent == '':
         return HttpResponse('请输入标题和内容')
     if not poster:
-        poster='游客'+userip
+        poster='游客'+mkip
 
     a = Posting.objects.last()
     if not bool(a):
@@ -61,7 +84,7 @@ def create_pst(request):
         pstindex = str(lindex).zfill(10)
 
     Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster,comment_num=0)
-    posting=Posting.objects.filter(index=pstindex,is_active=True)
+    posting=Posting.objects.filter(Q(index=pstindex)&Q(is_active=True))
 
     return render(request, 'bbsapp/posting.html', locals())
 
@@ -75,16 +98,19 @@ def create_cmt(request):
 
     # 获取用户IP
     userip=request.META['REMOTE_ADDR']
-    ipmask=userip[0:7]+'***'+userip[:-1]
+    mkip=maskip(userip)
 
-    posting = Posting.objects.filter(Q(index=ptindex), Q(is_active=True))
+    # 获取关联帖子
+    posting = Posting.objects.filter(Q(index=ptindex)&Q(is_active=True))
 
+    # 防止空内容
     if ccontent == '':
         return HttpResponse('请输入内容')
-
+    # 评论人为游客
     if not poster:
-        poster = '游客'+userip
+        poster = '游客'+mkip
 
+    # Comments表内的主键index按顺序写入
     a = Comments.objects.last()
     if not bool(a):
         lindex = "0000000001"
@@ -94,14 +120,24 @@ def create_cmt(request):
         lindex += 1
         cmtindex = str(lindex).zfill(10)
 
-    comment_num=posting[0].comment_num
-    comment_num+=1
+    b=Comments.objects.filter(Q(posting_id=ptindex)&Q(is_active=True))
+    if not b:
+        floor=1
+    else:
+        floor=len(b)
+    print(len(b))
 
-    Comments.objects.create(index=cmtindex, content=ccontent, poster=poster, posting_id=ptindex)
+    # 写评论数据到表内
+    Comments.objects.create(index=cmtindex, content=ccontent, poster=poster, posting_id=ptindex,floor=floor)
 
+    # 写评论数到帖子表的comment_num列
+    comment_num = posting[0].comment_num
+    comment_num += 1
+    # 修改帖子的评论数数据
     posting.update(comment_num=comment_num)
 
-    comments = Comments.objects.filter(Q(posting_id=ptindex), Q(is_active=True)).order_by('created_time')
+    # 查出前端需要的数据
+    comments = Comments.objects.filter(Q(posting_id=ptindex)&Q(is_active=True)).order_by('created_time')
     page_num = request.GET.get('page', 1)
     paginator = Paginator(comments, 30)
     c_page = paginator.page(int(page_num))

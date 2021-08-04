@@ -117,7 +117,9 @@ html{
     display: inline-block;
     width: 30%;
     height: 5%;
-    text-align: right;
+    text-align: center;
+    position: relative;
+    left: 100px;
 }
 
 .digestbox {

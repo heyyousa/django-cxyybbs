@@ -49,6 +49,7 @@ class Comments(models.Model):
     posting=models.ForeignKey(Posting,null=True,blank=True,on_delete=models.SET_NULL)
     content=models.TextField('评论')
     poster=models.CharField('评论人',max_length=20,default='游客')
+    floor=models.IntegerField('楼层',default=0)
     created_time=models.DateTimeField('创建时间',auto_now_add=True)
     updated_time=models.DateTimeField('更新时间',auto_now=True)
     is_active=models.BooleanField('活跃状态',default=True)
