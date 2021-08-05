@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bbsapp/css/mainpage.css' %}">
-    <title>主页</title>
+    <title>院内论坛</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
             <div class="menubox">
                 <ul>
                     <li>
-                        <a href="#">主页</a>
+                        <a href="/bbs">主页</a>
                     </li>
                     <li>
                         <a href="#">登录</a>
@@ -56,7 +56,7 @@
                         {{ p.poster }}
                     </div>
                     <div class="digestbox">
-                        {{ p.content }}
+                        {{ p.content_digest }}...
                     </div>
                     <div class="timebox">
                         {{ p.created_time|date:'y-m-d h:m:s' }}

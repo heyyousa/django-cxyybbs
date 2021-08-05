@@ -25,7 +25,6 @@ def maskip(userip):
                 b += a[j]
                 for n in range(3):
                     b += '*'
-
     return b
 
 
@@ -58,12 +57,16 @@ def posting(request):
 def wposting(request):
     return render(request, 'bbsapp/wposting.html', locals())
 
+
 # 发帖功能
 def create_pst(request):
     # 从request中获取有用信息
     ptitle = request.POST.get('ptitle')
     pcontent = request.POST.get('pcontent')
     poster = request.GET.get('poster')
+
+    # 截取20字摘要
+    content_digest=pcontent[0:18]
 
     # 获取用户IP，并伪装
     userip=request.META['REMOTE_ADDR']
@@ -83,7 +86,7 @@ def create_pst(request):
         lindex += 1
         pstindex = str(lindex).zfill(10)
 
-    Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster,comment_num=0)
+    Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster,comment_num=0,content_digest=content_digest)
     posting=Posting.objects.filter(Q(index=pstindex)&Q(is_active=True))
 
     return render(request, 'bbsapp/posting.html', locals())
@@ -96,7 +99,7 @@ def create_cmt(request):
     poster = request.GET.get('poster')
     page = request.GET.get('page')
 
-    # 获取用户IP
+    # 获取用户IP并伪装
     userip=request.META['REMOTE_ADDR']
     mkip=maskip(userip)
 
@@ -110,7 +113,7 @@ def create_cmt(request):
     if not poster:
         poster = '游客'+mkip
 
-    # Comments表内的主键index按顺序写入
+    # 制作主键index的代码块
     a = Comments.objects.last()
     if not bool(a):
         lindex = "0000000001"
@@ -120,12 +123,12 @@ def create_cmt(request):
         lindex += 1
         cmtindex = str(lindex).zfill(10)
 
-    b=Comments.objects.filter(Q(posting_id=ptindex)&Q(is_active=True))
+    # 制作楼层的代码块
+    b=Comments.objects.filter(Q(posting_id=ptindex))
     if not b:
         floor=1
     else:
-        floor=len(b)
-    print(len(b))
+        floor=len(b)+1
 
     # 写评论数据到表内
     Comments.objects.create(index=cmtindex, content=ccontent, poster=poster, posting_id=ptindex,floor=floor)

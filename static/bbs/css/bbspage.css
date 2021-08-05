@@ -1,0 +1,115 @@
+html{
+    font-size: 16px;
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    min-width: 1200px;
+
+}
+
+.headerbox {
+    height: 55px;
+    width: 100%;
+    background-color:rgba(131, 213, 245, 0.6);
+}
+
+.logbox {
+    display: inline-block;
+    width: 150px;
+    font-size: 2rem;
+    margin-left: 20px;
+}
+
+.menubox {
+    display: inline-block;
+    width: 80%;
+    height: 3%;
+}
+
+.menubox ul {
+    text-align: right;
+}
+
+.menubox ul li {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: right;
+    height: 3%;
+    width: 40px;
+    display: inline-block;
+}
+
+.contentbox {
+    text-align: center;
+}
+
+
+.mainbox {
+    float: left;
+    width: 100%;
+    height: 700px;
+}
+
+.mainbox ul {
+    
+}
+
+.mainbox ul li {
+    display: inline-block;
+    list-style: none;
+    width: 200px;
+    height: 400px;
+    position: relative;
+    left: 25%;
+    border:1px solid rgb(145, 145, 145);
+    border-radius: 5px;
+    margin-top: 5px;
+    text-align: center;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);;
+}
+
+.leftbox {
+    float: left;
+    width: 200px;
+    height: 300px;
+    margin-left: -90%;
+    position: relative;
+}
+
+
+
+.rightbox {
+    float: left;
+    background-color: blue;
+    width: 200px;
+    height: 300px;
+    margin-left: -200px;
+    position: relative;
+}
+
+.footerbox {
+    height: 70px;
+    width: 100%;
+    clear: both;
+    background-color: rgba(177, 177, 177,0.6);
+    text-align: center;
+}
+
+.footerbox div {
+    position: relative;
+    top: 25px;
+}
+
+
+body a:link {
+    color: black;
+    text-decoration: none;
+}
+
+body a:hover {
+    color: rgb(204, 43, 43);
+ }
+

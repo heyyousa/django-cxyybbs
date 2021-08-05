@@ -29,6 +29,7 @@ html{
 
 .menubox ul {
     text-align: right;
+    height: auto;
 }
 
 .menubox ul li {
@@ -39,6 +40,7 @@ html{
     height: 3%;
     width: 40px;
     display: inline-block;
+    
 }
 
 
@@ -80,12 +82,14 @@ html{
 .mainbox ul li {
     list-style: none;
     width: 800px;
-    height: 30%;
+    height: auto;
     position: relative;
     left: 25%;
-    border:1px solid black;
+    border:1px solid rgb(196, 196, 196);
     border-radius: 5px;
     margin-top: 5px;
+    word-wrap:break-word;  
+    word-break:break-all;
 }
 
 .replybox {
@@ -110,8 +114,8 @@ html{
 
 .contentbox {
     display: inline-block;
-    width: 70%;
-    height: 5%;
+    width: 65%;
+    height: auto;
     margin-left: 75px;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -119,6 +123,7 @@ html{
 
 .timebox {
     display: inline-block;
+    margin-left: 20px;
 }
 
 .leftbox {
@@ -133,7 +138,7 @@ html{
 .backmainbox{
     width: 80px;
     height: 25px;
-    border: 1px solid black;
+    border: 1px solid rgb(196, 196, 196);
     border-radius: 5px;
     position: relative;
     left: 55%;
@@ -144,7 +149,7 @@ html{
 .createbox {
     width: 80px;
     height: 25px;
-    border: 1px solid black;
+    border: 1px solid rgb(196, 196, 196);
     border-radius: 5px;
     position: relative;
     left: 55%;
@@ -156,7 +161,7 @@ html{
 .backtopbox {
     width: 80px;
     height: 25px;
-    border: 1px solid black;
+    border: 1px solid rgb(196, 196, 196);
     border-radius: 5px;
     position: relative;
     left: 55%;
