@@ -65,7 +65,7 @@
                         {{ p.content }}
                     </div>
                     <div class="timebox">
-                        {{ p.created_time|date:'y-m-d H:m:s' }}
+                        {{ p.created_time|date:'y-m-d H:i:s' }}
                     </div>
                 </li>
                 {% endfor %}
@@ -103,7 +103,7 @@
         </div>
         <div class="leftbox">
             <div class="backmainbox">
-                <a href="/bbsapp/backmain">主页</a>
+                <a href="/bbsapp/backmain">论坛主页</a>
             </div>
             <div class="createbox">
                 <a href="/bbsapp/wposting">发帖</a>

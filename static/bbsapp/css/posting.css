@@ -19,6 +19,7 @@ html{
     width: 150px;
     font-size: 2rem;
     margin-left: 20px;
+    margin-top: 5px;
 }
 
 .menubox {
@@ -78,6 +79,9 @@ html{
 
 }
 
+.mainbox ul {
+    margin-top: -8px;
+}
 
 .mainbox ul li {
     list-style: none;
@@ -130,9 +134,10 @@ html{
     float: left;
     width: 200px;
     height: 300px;
-    margin-left: -90%;
-    position: relative;
-    top: 15px;
+    margin-left: 10%;
+    position: fixed;
+    z-index: 9999;
+
 }
 
 .backmainbox{

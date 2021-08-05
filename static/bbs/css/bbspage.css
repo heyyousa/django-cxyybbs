@@ -91,7 +91,7 @@ html{
 }
 
 .footerbox {
-    height: 70px;
+    height: 55px;
     width: 100%;
     clear: both;
     background-color: rgba(177, 177, 177,0.6);
@@ -100,7 +100,7 @@ html{
 
 .footerbox div {
     position: relative;
-    top: 25px;
+    top: 30%;
 }
 
 

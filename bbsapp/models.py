@@ -28,7 +28,6 @@ class Posting(models.Model):
     index=models.CharField('索引',primary_key=True,max_length=10)
     title=models.CharField('题目',max_length=40)
     content=models.TextField('内容')
-    content_digest=models.CharField('内容摘要',max_length=40,default='')
     poster=models.CharField('发帖人',max_length=20,default='游客')
     comment_num=models.IntegerField('评论数',default=0)
     like_num=models.IntegerField('点赞数',default=0)

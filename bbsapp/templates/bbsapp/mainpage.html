@@ -56,10 +56,14 @@
                         {{ p.poster }}
                     </div>
                     <div class="digestbox">
-                        {{ p.content_digest }}...
+                        {% if p.content|length >= 30 %}
+                        {{ p.content|truncatechars:30 }}...
+                        {% else %}
+                        {{ p.content }}
+                        {% endif %}
                     </div>
                     <div class="timebox">
-                        {{ p.created_time|date:'y-m-d h:m:s' }}
+                        {{ p.created_time|date:'y-m-d H:i:s' }}
                     </div>
                 </li>
                 {% endfor %}

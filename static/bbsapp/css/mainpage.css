@@ -20,6 +20,7 @@ html{
     width: 150px;
     font-size: 2rem;
     margin-left: 20px;
+    margin-top: 5px;
 }
 
 .menubox {
@@ -139,8 +140,10 @@ html{
     float: left;
     width: 200px;
     height: 300px;
-    margin-left: -90%;
-    position: relative;
+    margin-left: 10%;
+    position: fixed;
+    z-index: 9999;
+
 }
 
 .backmainbox{
@@ -187,7 +190,7 @@ html{
 }
 
 .footerbox {
-    height: 100px;
+    height: 55px;
     width: 100%;
     clear: both;
 }

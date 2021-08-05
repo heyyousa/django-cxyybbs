@@ -65,18 +65,17 @@ def create_pst(request):
     pcontent = request.POST.get('pcontent')
     poster = request.GET.get('poster')
 
-    # 截取20字摘要
-    content_digest=pcontent[0:18]
-
-    # 获取用户IP，并伪装
+    # 获取游客IP并伪装
     userip=request.META['REMOTE_ADDR']
     mkip=maskip(userip)
-
-    if ptitle == '' or pcontent == '':
-        return HttpResponse('请输入标题和内容')
     if not poster:
         poster='游客'+mkip
 
+    # 防止空内容和空标题
+    if ptitle == '' or pcontent == '':
+        return HttpResponse('请输入标题和内容')
+
+    # 生成帖子的主键index的代码块
     a = Posting.objects.last()
     if not bool(a):
         lindex = "0000000001"
@@ -86,7 +85,10 @@ def create_pst(request):
         lindex += 1
         pstindex = str(lindex).zfill(10)
 
-    Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster,comment_num=0,content_digest=content_digest)
+    # 帖子数据写入数据库
+    Posting.objects.create(index=pstindex,title=ptitle,content=pcontent,poster=poster,comment_num=0)
+
+    # 查出前端需要的数据
     posting=Posting.objects.filter(Q(index=pstindex)&Q(is_active=True))
 
     return render(request, 'bbsapp/posting.html', locals())
@@ -99,9 +101,11 @@ def create_cmt(request):
     poster = request.GET.get('poster')
     page = request.GET.get('page')
 
-    # 获取用户IP并伪装
+    # 获取游客IP并伪装
     userip=request.META['REMOTE_ADDR']
     mkip=maskip(userip)
+    if not poster:
+        poster = '游客'+mkip
 
     # 获取关联帖子
     posting = Posting.objects.filter(Q(index=ptindex)&Q(is_active=True))
@@ -109,9 +113,6 @@ def create_cmt(request):
     # 防止空内容
     if ccontent == '':
         return HttpResponse('请输入内容')
-    # 评论人为游客
-    if not poster:
-        poster = '游客'+mkip
 
     # 制作主键index的代码块
     a = Comments.objects.last()
@@ -136,6 +137,7 @@ def create_cmt(request):
     # 写评论数到帖子表的comment_num列
     comment_num = posting[0].comment_num
     comment_num += 1
+
     # 修改帖子的评论数数据
     posting.update(comment_num=comment_num)
 
