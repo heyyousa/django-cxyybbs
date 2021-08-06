@@ -30,7 +30,8 @@ html{
 
 .menubox ul {
     text-align: right;
-    height: auto;
+    position: relative;
+    top: -5px;
 }
 
 .menubox ul li {

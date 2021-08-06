@@ -5,6 +5,5 @@ from bbsapp.models import *
 from django.db.models import Q
 
 def bbs(request):
-    
     return render(request,'bbspage.html',locals())
 

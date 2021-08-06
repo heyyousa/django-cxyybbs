@@ -20,6 +20,7 @@ html{
     width: 150px;
     font-size: 2rem;
     margin-left: 20px;
+    margin-top: 5px;
 }
 
 .menubox {
@@ -30,6 +31,8 @@ html{
 
 .menubox ul {
     text-align: right;
+    position: relative;
+    top: -5px;
 }
 
 .menubox ul li {

@@ -30,13 +30,21 @@ def maskip(userip):
 
 # bbs主页
 def mainpage(request):
-    postings = Posting.objects.all()
+    postings = Posting.objects.all().order_by('-created_time')
 
     paginator = Paginator(postings, 30)
     page_num = request.GET.get('page', 1)  # 第二个参数为第一参数没有时的默认值
     c_page = paginator.page(int(page_num))
 
     return render(request, 'bbsapp/mainpage.html', locals())
+
+# 搜索功能
+def search(request):
+    s_title=request.GET.get('s_title')
+
+    posting=Posting.objects.filter(Q(title__icontains=s_title)&Q(is_active=True))
+
+    return render(request,'bbsapp/mainpage.html',locals())
 
 
 # 帖子页面
