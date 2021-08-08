@@ -3,9 +3,10 @@ html{
 }
 
 body {
-    background-image: url(../img/bg7.jpg);
+    background-image: url(../img/bgocean.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
+    background-attachment: fixed;
 }
 
 .wrap {
@@ -18,17 +19,20 @@ body {
 .headerbox {
     height: 55px;
     width: 100%;
-    background-color: #E4E4E1;
-    background-image: radial-gradient(at top center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
- 	background-blend-mode: normal, multiply;
+    background-color: #000000BF
+
 }
 
-.logbox {
+.logobox {
     display: inline-block;
     width: 150px;
     font-size: 2rem;
     margin-left: 20px;
     margin-top: 5px;
+}
+
+.logobox a {
+    color: white;
 }
 
 .menubox {
@@ -44,7 +48,6 @@ body {
 }
 
 .menubox ul li {
-    color: white;
     font-size: 1rem;
     font-weight: 500;
     font: white;
@@ -53,6 +56,10 @@ body {
     width: 40px;
     display: inline-block;
     
+}
+
+.menubox li a{
+    color: white;
 }
 
 
@@ -106,6 +113,7 @@ body {
     word-wrap:break-word;  
     word-break:break-all;
     color: white;
+    background-color: #000000BF;
 }
 
 .replybox {
@@ -221,6 +229,7 @@ body {
     min-height: 106px;
     max-width: 206px;
     max-height: 106px;
+    background-color: #000000BF;
 }
 
 .buttonbox {
