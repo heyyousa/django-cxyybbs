@@ -9,27 +9,23 @@
 </head>
 
 <body>
-
+    <button>
+        click
+    </button>
+    <p>
+        TEST
+    </p>
+    <input type="text" placeholder="这是个输入框">
 </body>
 
 </html>
 
 <script>
-    var date = new Date()
-    console.log(date.getMonth())
-    console.log(date.getTime())
-    console.log(date.valueOf())
+    var btn = document.querySelector('button')
+    var div = document.querySelector('p')
+    var inp = document.querySelector('input')
+    btn.onclick = function () {
+        inp.placeholder = '点了以下'
+    }
 
-    var date1 = +new Date()
-    console.log(date1)
-
-    var times = (1628578009380 - 1628568573498) / 1000
-    var s = parseInt(times % 60)
-    console.log(s)
-    var m = parseInt(times / 60 % 60)
-    console.log(m)
-    var h = parseInt(times / 60 / 60 % 24)
-    console.log(h)
-    var d = parseInt(times / 60 / 60 / 24)
-    console.log(d)
 </script>
