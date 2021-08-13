@@ -50,7 +50,7 @@ body {
 .menubox ul li {
     font-size: 1rem;
     font-weight: 500;
-    font: white;
+    color: white;
     text-align: right;
     height: 3%;
     width: 40px;
@@ -218,6 +218,7 @@ body {
     font-size: 1rem;
     width: 200px;
     height: 100px;
+    color: white;
 }
 
 .formbox input {
@@ -253,11 +254,15 @@ body {
 
 .pagebox {
     text-align: center;
+    color: white;
 }
 
+.pagebox a {
+    color: white;
+}
 
 body a:link {
-    color: black;
+
     text-decoration: none;
 }
 
