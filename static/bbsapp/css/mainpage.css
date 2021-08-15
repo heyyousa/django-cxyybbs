@@ -12,9 +12,13 @@ html{
 .headerbox {
     height: 55px;
     width: 100%;
-    background-color:rgba(131, 213, 245, 0.6);
+    /* background-color:rgba(131, 213, 245, 0.6); */
+    background-color: #c21f30;
 }
 
+.headerbox a {
+    color: white;
+}
 .logbox {
     display: inline-block;
     width: 150px;
@@ -203,11 +207,10 @@ html{
 
 
 body a:link {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
 body a:hover {
     color: rgb(204, 43, 43);
  }
-
