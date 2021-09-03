@@ -9,7 +9,6 @@ urlpatterns = [
     path('create_pst/',views.create_pst),  # 发帖功能
     path('create_cmt/',views.create_cmt),  # 评论功能
     path('backmain/',views.backmain),  # 返回主页
-    path('backtop/',views.backtop),  # 返回顶部
     path('test/',views.test),  # 测试页
     path('wdata/',views.wdata),  # 写入帖子数据
     path('wcomments/',views.wcomments),  # 写评论数据

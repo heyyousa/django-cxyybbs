@@ -42,9 +42,14 @@ def mainpage(request):
 def search(request):
     s_title=request.GET.get('s_title')
 
-    posting=Posting.objects.filter(Q(title__icontains=s_title)&Q(is_active=True))
+    postings=Posting.objects.filter(Q(title__icontains=s_title)&Q(is_active=True))
 
-    return render(request,'bbsapp/mainpage.html',locals())
+    paginator = Paginator(postings, 30)
+    page_num = request.GET.get('page', 1)  # 第二个参数为第一参数没有时的默认值
+    c_page = paginator.page(int(page_num))
+    print(postings)
+
+    return render(request,'bbsapp/searchpage.html',locals())
 
 
 # 帖子页面
@@ -98,6 +103,7 @@ def create_pst(request):
 
     # 查出前端需要的数据
     posting=Posting.objects.filter(Q(index=pstindex)&Q(is_active=True))
+    flag=1
 
     return render(request, 'bbsapp/posting.html', locals())
 
@@ -111,9 +117,9 @@ def create_cmt(request):
 
     # 获取游客IP并伪装
     userip=request.META['REMOTE_ADDR']
-    mkip=maskip(userip)
+    mskip=maskip(userip)
     if not poster:
-        poster = '游客'+mkip
+        poster = '游客'+mskip
 
     # 获取关联帖子
     posting = Posting.objects.filter(Q(index=ptindex)&Q(is_active=True))
@@ -161,16 +167,6 @@ def create_cmt(request):
 # 回到主页功能
 def backmain(request):
     return HttpResponseRedirect('/bbsapp/mainpage')
-
-
-# 回到顶部功能
-def backtop(request):
-    chtml = request.GET.get('chtml')
-
-    if chtml == 'main':
-        return HttpResponseRedirect('/bbsapp/mainpage')
-    else:
-        return HttpResponseRedirect('/bbsapp/posting')
 
 
 # 写帖子测试数据函数

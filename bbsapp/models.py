@@ -29,6 +29,7 @@ class Posting(models.Model):
     title=models.CharField('题目',max_length=40)
     content=models.TextField('内容')
     poster=models.CharField('发帖人',max_length=20,default='游客')
+
     comment_num=models.IntegerField('评论数',default=0)
     like_num=models.IntegerField('点赞数',default=0)
     created_time=models.DateTimeField('创建时间',auto_now_add=True)

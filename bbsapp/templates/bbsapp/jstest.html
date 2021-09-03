@@ -6,78 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <script type="text/javascript" src="../../../static/bbsapp/js/jquery.js"></script>
 </head>
 
 <style>
-    body {
-        overflow: hidden;
-    }
 
-    #div0 {
-        position: relative;
-        left: 99%;
-        width: 30px;
-        height: 30px;
-    }
-
-    #span {
-        display: inline-block;
-        position: relative;
-        left: 0;
-        vertical-align: top;
-        width: 30px;
-        height: 30px;
-        background-color: blue;
-    }
-
-    #div2 {
-        display: none;
-        vertical-align: top;
-        position: relative;
-        left: 0;
-        top: -30px;
-        width: 200px;
-        height: 30px;
-        background-color: red;
-        z-index: -1;
-
-    }
-
-    #test {
-        position: relative;
-        left: 0;
-        width: 350px;
-    }
-
-    #t1 {
-        position: relative;
-        display: inline-block;
-        background-color: yellow;
-        width: 100px;
-        height: 100px;
-    }
-
-    #t2 {
-        position: relative;
-        left: -100px;
-        display: inline-block;
-        background-color: yellow;
-        width: 200px;
-        height: 100px;
-    }
 </style>
 
 
 
 <body>
     <div id="div0">
-        <div id="span">←</div>
-        <div id="div2">11</div>
-    </div>
-    <div id="test">
-        <div id="t1">11</div>
-        <div id="t2">22</div>
+        <form action="">
+            <select name="" id="s1">
+                <option value="1">111</option>
+                <option value="2">222</option>
+            </select>
+        </form>
     </div>
 </body>
 
@@ -86,36 +31,5 @@
 
 
 <script>
-    function animate(obj, target, callback) {
-        clearInterval(obj.timer);
-        obj.timer = setInterval(function () {
-            var step = (target - obj.offsetLeft) / 10;
-            step = step > 0 ? Math.ceil(step) : Math.floor(step);
-            console.log(step);
-            if (obj.offsetLeft == target) {
-                clearInterval(obj.timer);
-                if (callback) {
-                    callback();
-                }
-            }
-            obj.style.left = obj.offsetLeft + step + 'px';
-        }, 30);
-    }
-    var div0 = document.querySelector('#div0');
-    var div2 = document.querySelector('#div2');
-
-    div0.addEventListener('mouseenter', function () {
-        div2.style.display = 'inline-block';
-        animate(div2, -170);
-    });
-
-    div0.addEventListener('mouseleave', function () {
-        animate(div2, 0, function () { div2.style.display = 'none'; });
-
-    })
-
-    div2.addEventListener('mouseenter', function () {
-        div0.removeEventListener('mouserleave');
-    })
 
 </script>

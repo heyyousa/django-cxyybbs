@@ -4,9 +4,13 @@ html{
 
 .wrap {
     width: 100%;
-    height: 100%;
+    height: 90%;
     min-width: 1200px;
 
+}
+
+.headerbox a {
+    color: white;
 }
 
 .headerbox {
@@ -15,12 +19,23 @@ html{
     background-color:rgba(131, 213, 245, 0.6);
 }
 
-.logbox {
+.logoimg {
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    position: relative;
+    left: 10px;
+    background-image: url(../../bbsapp/img/bluecross.png);
+}
+
+.logobox {
     display: inline-block;
     width: 150px;
     font-size: 2rem;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 5px;
+    position: relative;
+    top: -15px;
 }
 
 .menubox {
@@ -32,7 +47,7 @@ html{
 .menubox ul {
     text-align: right;
     position: relative;
-    top: -5px;
+    top: -20px;
 }
 
 .menubox ul li {
@@ -86,7 +101,6 @@ html{
 
 .rightbox {
     float: left;
-    background-color: blue;
     width: 200px;
     height: 300px;
     margin-left: -200px;
@@ -108,7 +122,6 @@ html{
 
 
 body a:link {
-    color: black;
     text-decoration: none;
 }
 

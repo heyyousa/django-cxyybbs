@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bbsapp/css/mainpage.css' %}">
     <title>院内论坛</title>
+    <script type="text/javascript" src="../../../static/bbsapp/js/jquery.js"></script>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
         <header class="headerbox">
             <div class="logoimg"></div>
             <div class="logbox">
-                <a href="#">沧县医院</a>
+                <a href="/bbs">沧县医院</a>
             </div>
             <div class="menubox">
                 <ul>
@@ -22,10 +23,10 @@
                         <a href="/bbs">主页</a>
                     </li>
                     <li>
-                        <a href="#">登录</a>
+                        <a href="javascript:;" class="disable">登录</a>
                     </li>
                     <li>
-                        <a href="#">注册</a>
+                        <a href="javascript:;" class="disable">注册</a>
                     </li>
                 </ul>
             </div>
@@ -33,10 +34,10 @@
 
         <div class="contentbox">
             <div class="searchbox">
-                <input type="text" name="search" placeholder="搜索">
+                <input type="text" id="s_title" name="search" placeholder="搜索">
             </div>
             <div class="searchbuttonbox">
-                <a href="/bbsapp/search?s_title={{ search }}">搜索</a>
+                <a href="" onclick="getValue(this)">搜索</a>
             </div>
             <div>
                 <img src="" alt="">
@@ -107,7 +108,7 @@
                 <a href="/bbsapp/wposting">发帖</a>
             </div>
             <div class="backtopbox">
-                <a href="/bbsapp/mainpage">回到开始</a>
+                <a href="javascript:;">回到顶部</a>
             </div>
         </div>
         <div class="rightbox">
@@ -120,3 +121,22 @@
 </body>
 
 </html>
+
+<script>
+    $(function () {
+        $('.backtopbox').click(function () {
+            console.log($(this).scrollTop());
+            $('body,html').animate({ scrollTop: 0 })
+        })
+
+        $('.disable').click(function () {
+            alert('暂未开放');
+        })
+    })
+
+    function getValue(a) {
+        var a_value = document.querySelector('#s_title').value;
+        a.href = '/bbsapp/search?s_title={{ ' + a_value + ' }}';
+    }
+
+</script>

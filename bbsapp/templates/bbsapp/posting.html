@@ -5,26 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'bbsapp/css/postingblack.css' %}">
+    <link rel="stylesheet" href="{% static 'bbsapp/css/posting.css' %}">
     <title>评论</title>
+    <script type="text/javascript" src="../../../static/bbsapp/js/jquery.js"></script>
 </head>
 
 <body>
     <div class="wrap">
         <header class="headerbox">
+            <div class="logoimg"></div>
             <div class="logobox">
-                <a href="#">沧县医院</a>
+                <a href="/bbs">沧县医院</a>
             </div>
             <div class="menubox">
                 <ul>
                     <li>
                         <a href="/bbs">主页</a>
                     </li>
-                    <li>
-                        <a href="#">登录</a>
+                    <li class="disable">
+                        <a href="javascript:;">登录</a>
                     </li>
-                    <li>
-                        <a href="#">注册</a>
+                    <li class="disable">
+                        <a href="javascript:;">注册</a>
                     </li>
                 </ul>
             </div>
@@ -35,6 +37,7 @@
 
         <div class="mainbox">
             <ul class="pbox">
+                {% if c_page.number == 1 or flag == 1 %}
                 <li>
                     <div class="replybox">
                         楼主
@@ -46,7 +49,7 @@
                         {{ posting.0.content }}
                     </div>
                     <div class="timebox">
-                        {{ posting.0.created_time|date:'y-m-d H:m:s' }}
+                        {{ posting.0.created_time|date:'y-m-d H:i:s' }}
                     </div>
                 </li>
                 {% for p in c_page %}
@@ -69,6 +72,29 @@
                     </div>
                 </li>
                 {% endfor %}
+                {% else %}
+                {% for p in c_page %}
+                <li>
+                    <div class="replybox">
+                        {% if p.poster == posting.poster %}
+                        楼主
+                        {% else %}
+                        {{ p.floor }}楼
+                        {% endif %}
+                    </div>
+                    <div class="posterbox">
+                        {{ p.poster }}
+                    </div>
+                    <div class="contentbox">
+                        {{ p.content }}
+                    </div>
+                    <div class="timebox">
+                        {{ p.created_time|date:'y-m-d H:i:s' }}
+                    </div>
+                </li>
+                {% endfor %}
+                {% endif %}
+
             </ul>
 
             <div class="pagebox">
@@ -109,7 +135,7 @@
                 <a href="/bbsapp/wposting">发帖</a>
             </div>
             <div class="backtopbox">
-                <a href="/bbsapp/posting?ptindex={{ posting.0.index }}">回到开始</a>
+                <a href="javascript:;">回到顶部</a>
             </div>
             <div class="formbox">
                 <form action="/bbsapp/create_cmt/" method="POST">
@@ -125,12 +151,26 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div class="rightbox">
-    </div>
-    <footer class="footerbox">
 
-    </footer>
+        <div class="rightbox">
+        </div>
+        <footer class="footerbox">
+
+        </footer>
+    </div>
 </body>
 
 </html>
+
+<script>
+    $(function () {
+        $('.backtopbox').click(function () {
+            console.log($(this).scrollTop());
+            $('body,html').animate({ scrollTop: 0 })
+        })
+
+        $('.disable').click(function () {
+            alert('暂未开放');
+        })
+    })
+</script>

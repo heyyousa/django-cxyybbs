@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bbsapp/css/searchpage.css' %}">
+    <title>院内论坛</title>
+    <script type="text/javascript" src="../../../static/bbsapp/js/jquery.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="headerbox">
+            <div class="logoimg"></div>
+            <div class="logbox">
+                <a href="/bbs">沧县医院</a>
+            </div>
+            <div class="menubox">
+                <ul>
+                    <li>
+                        <a href="/bbs">主页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="disable">登录</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="disable">注册</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="contentbox">
+            <div class="searchbox">
+                <input type="text" name="search" placeholder="搜索">
+            </div>
+            <div class="searchbuttonbox">
+                <a href="/bbsapp/search?s_title={{ search }}">搜索</a>
+            </div>
+            <div>
+                <img src="" alt="">
+            </div>
+        </div>
+
+        <div class="mainbox">
+            <ul class="pbox">
+                {% for p in c_page %}
+                <li>
+                    <div class="replybox">
+                        {{ p.comment_num }}
+                    </div>
+                    <div class="titlebox">
+                        <a href="/bbsapp/posting?ptindex={{ p.index }}">{{ p.title }}</a>
+                    </div>
+                    <div class="posterbox">
+                        {{ p.poster }}
+                    </div>
+                    <div class="digestbox">
+                        {% if p.content|length >= 30 %}
+                        {{ p.content|truncatechars:30 }}...
+                        {% else %}
+                        {{ p.content }}
+                        {% endif %}
+                    </div>
+                    <div class="timebox">
+                        {{ p.created_time|date:'y-m-d H:i:s' }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div class="pagebox">
+                {% if paginator.num_pages != 1 %}
+                {% if c_page.number != 1 %}
+                <a href="/bbsapp/mainpage?page={{ 1 }}">首页</a>
+                {% endif %}
+
+
+                {% if c_page.has_previous %}
+                <a href="/bbsapp/mainpage?page={{ c_page.previous_page_number }}">上一页</a>
+                {% endif %}
+
+
+                {% for p_num in paginator.page_range %}
+                {% if p_num == c_page.number %}
+                {{ p_num }}
+                {% else %}
+                <a href="/bbsapp/mainpage?page={{ p_num }}">{{ p_num }}</a>
+                {% endif %}
+                {% endfor %}
+
+
+                {% if c_page.has_next %}
+                <a href="/bbsapp/mainpage?page={{ c_page.next_page_number }}">下一页</a>
+                {% endif %}
+
+
+                {% if c_page.number != paginator.num_pages %}
+                <a href="/bbsapp/mainpage?page={{ paginator.num_pages }}">尾页</a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="leftbox">
+            <div class="createbox">
+                <a href="/bbsapp/wposting">发帖</a>
+            </div>
+            <div class="backtopbox">
+                <a href="javascript:;">回到顶部</a>
+            </div>
+        </div>
+        <div class="rightbox">
+            right
+        </div>
+        <footer class="footerbox">
+
+        </footer>
+    </div>
+</body>
+
+</html>
+
+<script>
+    $(function () {
+        $('.backtopbox').click(function () {
+            console.log($(this).scrollTop());
+            $('body,html').animate({ scrollTop: 0 })
+        })
+
+        $('.disable').click(function () {
+            alert('暂未开放');
+        })
+    })
+</script>
